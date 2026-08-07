@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="Xbox2013.Dashboard"
+    Publisher="CN=User"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="d95aa9d6-5571-4ed8-9e63-f62b2edb9568" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Xbox &apos;13 Dashboard</DisplayName>
+    <PublisherDisplayName>User</PublisherDisplayName>
+    <Logo>Assets\AppXBranding\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="XboxHome2.App">
+      <uap:VisualElements
+        DisplayName="xDashboard (Xbox &apos;13)"
+        Square150x150Logo="Assets\AppXBranding\Square150x150Logo.png"
+        Square44x44Logo="Assets\AppXBranding\Square44x44Logo.png"
+        Description="XboxHome2"
+        BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\AppXBranding\SmallTile.png" ShortName="Dashboard">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
+        <uap:SplashScreen Image="Assets\AppXBranding\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

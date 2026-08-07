@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="8cd661a9-801e-4383-a77b-5658156a241a"
+    Publisher="CN=User"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="8cd661a9-801e-4383-a77b-5658156a241a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>XboxHome</DisplayName>
+    <PublisherDisplayName>User</PublisherDisplayName>
+    <Logo>Assets\AppXBranding\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="XboxHome.App">
+      <uap:VisualElements
+        Square150x150Logo="Assets\AppXBranding\Square150x150Logo.png"
+        Square44x44Logo="Assets\AppXBranding\Square44x44Logo.png"
+        BackgroundColor="transparent" Description="Dashboard" DisplayName="Ηome (Xbox &apos;13)">
+        <uap:SplashScreen Image="Assets\AppXBranding\SplashScreen.png" />
+        <uap:DefaultTile Square71x71Logo="Assets\AppXBranding\SmallTile.png" Wide310x150Logo="Assets\AppXBranding\WideTile.png" Square310x310Logo="Assets\AppXBranding\LargeTile.png"/>
+      </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="xb-home"/>
+        </uap:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="Xbox2013.Messages"
+    Publisher="CN=User"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="587f5378-dfbb-45e8-a7fc-01e35b6692b9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Xbox &apos;13 Messages</DisplayName>
+    <PublisherDisplayName>Projet</PublisherDisplayName>
+    <Logo>Assets\AppXBranding\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="XboxMessages.App">
+      <uap:VisualElements
+        DisplayName="Messages"
+        Square150x150Logo="Assets\AppXBranding\Square150x150Logo.png"
+        Square44x44Logo="Assets\AppXBranding\Square44x44Logo.png"
+        Description="XboxMessages"
+        BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="Messages" Square71x71Logo="Assets\AppXBranding\SmallTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
+        <uap:SplashScreen Image="Assets\AppXBranding\SplashScreen.png"  BackgroundColor="black"/>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

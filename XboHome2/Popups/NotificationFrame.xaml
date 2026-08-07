@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="XboHome2.Popups.NotificationFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:XboHome2.Popups"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Background>
+        <ImageBrush ImageSource="/Assets/videoframe_394389.png"/>
+    </Page.Background>
+
+    <RelativePanel Margin="0,132" Padding="0,46">
+        <TextBlock x:Name="ScreenName" Text="Notifications" FontSize="40" FontWeight="SemiLight" FontFamily="Segoe UI" CharacterSpacing="6" TextLineBounds="TrimToCapHeight" VerticalAlignment="Top" Margin="100,0,0,0"/>
+        <GridView x:Name="MessageList" RelativePanel.Below="ScreenName" Margin="0,76,0,0" Padding="100,0,91,0" SelectionMode="None" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" XYFocusDown="{x:Bind CloseNotifications}" IncrementalLoadingTrigger="Edge" IncrementalLoadingThreshold="1">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid ItemHeight="421" ItemWidth="420" MaximumRowsOrColumns="1"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemContainerTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromHorizontalOffset="500" FromVerticalOffset="0" IsStaggeringEnabled="True"/>
+                </TransitionCollection>
+            </GridView.ItemContainerTransitions>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+            <GridViewItem Background="{ThemeResource SystemAccentColor}"/>
+        </GridView>
+        <Button x:Name="CloseNotifications" RelativePanel.AlignBottomWithPanel="True" Content="Close" Height="98" Width="238"/>
+    </RelativePanel>
+</Page>

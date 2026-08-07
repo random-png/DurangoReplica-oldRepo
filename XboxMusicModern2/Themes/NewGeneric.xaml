@@ -1,0 +1,152 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:xbui="using:XboxMusic.Controls">
+    <Thickness x:Key="XBTileButtonTileTextPadding">16,10,16,12</Thickness>
+    <SolidColorBrush x:Key="XBTileButtonBackground" Color="#222222"/>
+    <SolidColorBrush x:Key="XBTileButtonFocusedBackground" Color="{ThemeResource SystemAccentColor}"/>
+    <Style TargetType="xbui:TileButton" BasedOn="{StaticResource DefaultTileButtonStyle}"/>
+    <Style x:Key="DefaultTileButtonStyle" TargetType="xbui:TileButton">
+        <Setter Property="MinWidth" Value="56"/>
+        <Setter Property="MinHeight" Value="56"/>
+        <Setter Property="Background" Value="{ThemeResource XBTileButtonBackground}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IconMargin" Value="3,0,0,2"/>
+        <Setter Property="UseSystemFocusVisuals" Value="False"/>
+        <Setter Property="FocusVisualPrimaryBrush" Value="{ThemeResource SystemControlFocusVisualPrimaryBrush}"/>
+        <Setter Property="FocusVisualSecondaryBrush" Value="{ThemeResource SystemControlFocusVisualSecondaryBrush}"/>
+        <Setter Property="TileTextPadding" Value="{ThemeResource XBTileButtonTileTextPadding}"/>
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+        <Setter Property="IconFontSize" Value="44"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="xbui:TileButton">
+                    <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="SecondaryFocusVisual" EnableDependentAnimation="True" Storyboard.TargetProperty="StrokeThickness" Duration="0:0:0.10">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SecondaryFocusVisual" EnableDependentAnimation="True" Storyboard.TargetProperty="StrokeThickness">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="6"/>
+                                            <SplineDoubleKeyFrame KeyTime="0:0:0.10" Value="10" KeySpline=".3,.25,0,.88"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Unfocused">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PrimaryFocusVisual" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.08"/>
+                                        <DoubleAnimation Storyboard.TargetName="SecondaryFocusVisual" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.08"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Focused">
+                                    <VisualState.Setters>
+                                        <Setter Target="PrimaryFocusVisual.Margin" Value="-4"/>
+                                        <Setter Target="RootGrid.Background" Value="{ThemeResource XBTileButtonFocusedBackground}"/>
+                                    </VisualState.Setters>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="PrimaryFocusVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.16"/>
+                                        <DoubleAnimation Storyboard.TargetName="SecondaryFocusVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.16"/>
+                                        <ColorAnimation BeginTime="0:0:0.08" Storyboard.TargetName="TileTextDisplay" Storyboard.TargetProperty="(TileTextDisplay.Foreground).(SolidColorBrush.Color)" Duration="0:0:0.08" To="White"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="TextBackdropStates">
+                                <VisualState x:Name="Hide">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ReadableTextBackdrop" Storyboard.TargetProperty="Opacity" Duration="0:0:0.0" From="0" To="0"/>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ReadableTextBackdrop" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" EnableDependentAnimation="True">
+                                            <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                            <SplineDoubleKeyFrame KeyTime="0:0:0.174" KeySpline="1, .1, .65, .8" Value="0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="ShowOnFocus">
+                                    <VisualState.Storyboard>
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ReadableTextBackdrop" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" EnableDependentAnimation="True">
+                                                <DiscreteDoubleKeyFrame KeyTime="0" Value="0"/>
+                                                <SplineDoubleKeyFrame KeyTime="0:0:0.2" KeySpline=".3, 0, .15, 1" Value="1"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState.Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="AlwaysShown">
+                                    <VisualState.Setters>
+                                        <Setter Target="ReadableTextBackdrop.(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Value="1"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="NoBackdrop">
+                                    <VisualState.Setters>
+                                        <Setter Target="ReadableTextBackdrop.(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Value="0"/>
+                                        <Setter Target="ReadableTextBackdrop.Visibility" Value="Collapsed"/>
+                                        <Setter Target="ReadableTextBackdrop.Opacity" Value="0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="FullTileWidth">
+                                    <VisualState.Setters>
+                                        <Setter Target="TextAndBackdropContainer.HorizontalAlignment" Value="Stretch"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <FontIcon Glyph="{TemplateBinding Glyph}" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="{TemplateBinding IconFontSize}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{TemplateBinding Foreground}" Margin="{TemplateBinding IconMargin}"/>
+                        <Border x:Name="BorderOverlay" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" IsHitTestVisible="False"/>
+                        <Grid x:Name="TextAndBackdropContainer" VerticalAlignment="Bottom" HorizontalAlignment="Left" ui:UIElementExtensions.ClipToBounds="True">
+                            <Rectangle x:Name="ReadableTextBackdrop" Fill="#B5000000" RenderTransformOrigin=".5,1">
+                                <Rectangle.RenderTransform>
+                                    <CompositeTransform x:Name="CompositeTransform" ScaleY="0"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <TextBlock x:Name="TileTextDisplay" Text="{TemplateBinding TileText}" Padding="{TemplateBinding TileTextPadding}" Foreground="{TemplateBinding Foreground}" TextWrapping="WrapWholeWords" FontSize="24" CharacterSpacing="32"/>
+                        </Grid>
+                        <Rectangle x:Name="PrimaryFocusVisual" Stroke="{TemplateBinding FocusVisualPrimaryBrush}" StrokeThickness="{ThemeResource FocusVisualThickness}" Opacity="0" IsHitTestVisible="False" ui:Effects.Shadow="{ThemeResource ButtonShadow}"/>
+                        <Rectangle x:Name="SecondaryFocusVisual" Stroke="{TemplateBinding FocusVisualSecondaryBrush}" StrokeThickness="{ThemeResource FocusVisualThickness}" Opacity="0" IsHitTestVisible="False"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="xbui:NewDialog">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+        <Setter Property="TabNavigation" Value="Local"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="xbui:NewDialog">
+                    <Popup x:Name="RootPopup" IsLightDismissEnabled="False" IsOpen="True">
+                        <Grid x:Name="RootGrid">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/Assets/consolemessagedialogrefer2.png"/>
+                            </Grid.Background>
+                            <Rectangle x:Name="MessageBackdrop" Height="496" Fill="{ThemeResource SystemChromeGrayColor}" VerticalAlignment="Center" Opacity="0.4"/>
+                            <Grid x:Name="MessageSpace" VerticalAlignment="Center" Height="496" Padding="136,22,136,26" RowSpacing="18">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="Title" Text="This will be bound to the title" Margin="-1,0,0,0" FontSize="48" FontFamily="{TemplateBinding FontFamily}" FontWeight="Light" TextLineBounds="TrimToCapHeight" VerticalAlignment="Top" OpticalMarginAlignment="TrimSideBearings"/>
+                                <ContentPresenter x:Name="Content" Grid.Row="1" FontSize="24" Margin="-1,0,0,0" Content="We couldn’t sign you in. Try again in a few minutes, or check your account by signing in to account.live.com. Sign in: 0x8004804E other other other other other discs. We will tell you when it is full." TextWrapping="WrapWholeWords" LineHeight="46"/>
+                            </Grid>
+                        </Grid>
+                    </Popup>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

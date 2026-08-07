@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "XboxMusicModern2": {
+      "commandName": "MsixPackage"
+    }
+  }
+}

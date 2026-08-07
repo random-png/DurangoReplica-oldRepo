@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="XboxMessages.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:XboxMessages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <RelativePanel Margin="100,160">
+        <RelativePanel.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition FromHorizontalOffset="500" FromVerticalOffset="0" IsStaggeringEnabled="True"/>
+            </TransitionCollection>
+        </RelativePanel.ChildrenTransitions>
+        <Rectangle x:Name="TitleBar" Height="32" Width="1920" Margin="-100,-288,0,0" Fill="Transparent"/>
+        <FontIcon Glyph="" FontFamily="/Assets/Segoe Xbox Symbol v1.07.ttf#Segoe Xbox Symbol" RelativePanel.AlignRightWithPanel="True" FontSize="48" Margin="0,-142,-2,0"/>
+        <TextBlock x:Name="HeaderText" Text="We couldn't recreate this app." FontSize="48" FontWeight="SemiLight"/>
+        <TextBlock x:Name="BodyText" RelativePanel.Below="HeaderText" Margin="0,12,0,0" Width="672" FontSize="24" Text="We couldn't find much reference material for this app, or any reference at all for the main feature of this app. It's only included here in case if that changes. Sorry for that." TextWrapping="WrapWholeWords"/>
+        <Button x:Name="QuitButton" RelativePanel.AlignBottomWithPanel="True" Content="Exit" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Click="Button_Click" VerticalAlignment="Bottom" Height="98" Width="238" Padding="14"/>
+        <Button x:Name="EnterButton" RelativePanel.AlignBottomWithPanel="True" RelativePanel.RightOf="QuitButton" Margin="8,0,0,0" FontSize="24" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Click="Preview" VerticalAlignment="Bottom" BorderBrush="#59FFFFFF" Background="Transparent" BorderThickness="1" Height="98" Width="238" Padding="14" FocusVisualPrimaryThickness="4" FocusVisualSecondaryThickness="4" FocusVisualMargin="-8" Content="Let me see what's here anyway"/>
+    </RelativePanel>
+</Page>

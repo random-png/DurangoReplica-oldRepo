@@ -1,0 +1,290 @@
+﻿<Page
+    x:Class="XboxMusic.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:XboxMusic"
+    xmlns:ctk="using:CommunityToolkit.WinUI.Controls"
+    xmlns:xbui="using:XboxMusic.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" NavigationCacheMode="Required"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemRevealStyle}">
+            <Setter Property="Margin" Value="0,0,43,0"/>
+            <Setter Property="Foreground" Value="{ThemeResource PivotHeaderForegroundUnselectedBrush}"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="/Assets/Segoe Xbox Symbol v1.07.ttf#Segoe Xbox Symbol"/>
+            <Setter Property="FontWeight" Value="SemiLight"/>
+            <Setter Property="FontSize" Value="38"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="FocusVisualPrimaryBrush" Value="{ThemeResource SystemAccentColor}"/>
+            <Setter Property="FocusVisualSecondaryBrush" Value="{ThemeResource SystemControlTransparentBrush}"/>
+            <Setter Property="FocusVisualPrimaryThickness" Value="0,0,0,2"/>
+            <Setter Property="FocusVisualSecondaryThickness" Value="0"/>
+            <Setter Property="FocusVisualMargin" Value="0,-8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ListViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}"
+                        x:Name="Root"
+                        Control.IsTemplateFocusTarget="True"
+                        FocusVisualMargin="{TemplateBinding FocusVisualMargin}"
+                        SelectionCheckMarkVisualEnabled="{ThemeResource ListViewItemSelectionCheckMarkVisualEnabled}"
+                        CheckBrush="{ThemeResource ListViewItemCheckBrush}"
+                        CheckBoxBrush="{ThemeResource ListViewItemCheckBoxBrush}"
+                        DragForeground="{ThemeResource ListViewItemDragForeground}"
+                        FocusBorderBrush="{ThemeResource ListViewItemFocusBorderBrush}"
+                        FocusSecondaryBorderBrush="{ThemeResource ListViewItemFocusSecondaryBorderBrush}"
+                        PointerOverForeground="{ThemeResource ListViewItemForegroundPointerOver}"
+                        SelectedForeground="{ThemeResource ListViewItemForegroundSelected}"
+                        DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                        DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                        ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        ContentMargin="{TemplateBinding Padding}"
+                        CheckMode="{ThemeResource ListViewItemCheckMode}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="GroupHeaderTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#CC000000"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="CharacterSpacing" Value="16"/>
+        </Style>
+        <Storyboard x:Name="PivotRight" Completed="SelectedResync">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="RootPresenter" Storyboard.TargetProperty="(UIElement.RenderTransform).(RenderTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="-1920" KeySpline="0,0,0,1"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0.25" Value="1920"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0" KeySpline="0,0,0,1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="PivotLeft" Completed="SelectedResync">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="RootPresenter" Storyboard.TargetProperty="(UIElement.RenderTransform).(RenderTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1920" KeySpline="0,0,0,1"/>
+                <DiscreteDoubleKeyFrame KeyTime="0:0:0.25" Value="-1920"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0" KeySpline="0,0,0,1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Thickness x:Key="XBTileButtonTileTextPadding">18,11,14,17</Thickness>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/videoframe_88341.png" Stretch="UniformToFill" Opacity="0"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition IsStaggeringEnabled="True" FromHorizontalOffset="500" FromVerticalOffset="0"/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <xbui:CustomPersonPicture x:Name="ActiveUserIcon" ProfilePicture="/Assets/Images/GenericPFP.png" BorderThickness="0" Margin="172,62,0,0" Width="64" Height="64">
+            <xbui:CustomPersonPicture.ContextFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Text="Test PivotLeft" Click="MenuFlyoutItem_Click">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xF10C;"/>
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Test PivotRight" Click="MenuFlyoutItem_Click_1">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon Glyph="&#xF10D;"/>
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                </MenuFlyout>
+            </xbui:CustomPersonPicture.ContextFlyout>
+        </xbui:CustomPersonPicture>
+        <TextBlock x:Name="AppName" Text="{ThemeResource AppBrandingNameText}" FontFamily="Segoe UI" Margin="298,74,0,0" OpticalMarginAlignment="TrimSideBearings" FontSize="60" FontWeight="Light" CharacterSpacing="10" TextLineBounds="Tight" VerticalAlignment="Top"/>
+        <ListView x:Name="ScreenList" SelectedIndex="0" Margin="0,139,0,0" VerticalAlignment="Top" Padding="172,0,0,0" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentRenderOutsideBounds="True" ElementSoundMode="Off" SelectionChanged="ScreenList_SelectionChanged" HorizontalAlignment="Stretch">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel Orientation="Horizontal" UseLayoutRounding="False"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListViewItem Tag="home">Home</ListViewItem>
+            <ListViewItem Tag="radio">Radio</ListViewItem>
+            <ListViewItem Tag="featured">Featured</ListViewItem>
+            <ListViewItem Tag="top">Top music</ListViewItem>
+            <!--<ListViewItem Tag="unfaithful2">Test page</ListViewItem>-->
+        </ListView>
+        <ctk:SwitchPresenter x:Name="RootPresenter" Grid.Row="1" Value="home">
+            <ctk:SwitchPresenter.RenderTransform>
+                <TranslateTransform x:Name="TranslateTransform"/>
+            </ctk:SwitchPresenter.RenderTransform>
+            <ctk:Case Value="home">
+                <RelativePanel Padding="172,26,0,0">
+                    <StackPanel x:Name="HomePrimaryActionBlock" Spacing="8">
+                        <xbui:TileButton TileText="Playlists" Width="208" Height="208" Margin="0,40,0,0" Glyph="&#xE43E;"/>
+                        <xbui:TileButton TileText="Collection" Width="208" Height="208" Glyph="&#xE386;"/>
+                        <xbui:TileButton TileText="Search" Width="208" Height="208" Glyph="&#xE3F7;"/>
+                    </StackPanel>
+                    <RelativePanel x:Name="NowPlayingBlock" Margin="44,0,0,0" RelativePanel.RightOf="HomePrimaryActionBlock">
+                        <TextBlock x:Name="NowPlayingBlockHeader" Text="NOW PLAYING" Style="{ThemeResource GroupHeaderTextBlockStyle}"/>
+                        <Button RelativePanel.Below="NowPlayingBlockHeader" Background="{ThemeResource SystemControlTransparentBrush}" Width="640" Height="640" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Left">
+                            <TextBlock Padding="18,14" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" FontSize="24" FontWeight="Bold">THIS IS WHERE THE NOW PLAYING TILE WILL GO</TextBlock>
+                        </Button>
+                    </RelativePanel>
+                    <RelativePanel x:Name="RecentPlayBlock" Margin="8,0,0,0" RelativePanel.RightOf="NowPlayingBlock">
+                        <TextBlock x:Name="RecentPlayBlockHeader" Text="RECENT PLAYS" Style="{ThemeResource GroupHeaderTextBlockStyle}"/>
+                        <GridView x:Name="HomeRecentsGridView" RelativePanel.Below="RecentPlayBlockHeader" SelectionMode="Extended" CanReorderItems="True" CanDragItems="True" AllowDrop="True">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Vertical" MaximumRowsOrColumns="2"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridViewItem Background="DarkRed"/>
+                            <GridViewItem Background="DodgerBlue"/>
+                            <GridViewItem Background="ForestGreen"/>
+                            <GridViewItem Background="Goldenrod"/>
+                        </GridView>
+                    </RelativePanel>
+                </RelativePanel>
+            </ctk:Case>
+            <ctk:Case Value="radio">
+                <RelativePanel Padding="172,26,0,0">
+                    <StackPanel x:Name="RadioPrimaryActionBlock" Spacing="8">
+                        <Button Content="Stations" Width="208" Height="208" Margin="0,40,0,0"/>
+                        <Button Content="Create station" Width="208" Height="208"/>
+                    </StackPanel>
+                    <RelativePanel x:Name="RecentStationsBlock" Margin="44,0,0,0" RelativePanel.RightOf="RadioPrimaryActionBlock">
+                        <TextBlock x:Name="RecentStationsBlockHeader" Text="RECENT" FontSize="18" FontWeight="SemiBold" FontFamily="Segoe UI" CharacterSpacing="16" Margin="0,0,0,16"/>
+                        <GridView x:Name="RadioRecentsGridView" RelativePanel.Below="RecentStationsBlockHeader">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Vertical" MaximumRowsOrColumns="2" ItemHeight="324" ItemWidth="324"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridViewItem Background="DarkRed"/>
+                            <GridViewItem Background="DodgerBlue"/>
+                        </GridView>
+                    </RelativePanel>
+                    <RelativePanel x:Name="SuggestedStationsBlock" Margin="36,0,0,0" RelativePanel.RightOf="RecentStationsBlock">
+                        <TextBlock x:Name="SuggestedStationsBlockHeader" Text="SUGGESTED" FontSize="18" FontWeight="SemiBold" FontFamily="Segoe UI" CharacterSpacing="16" Margin="0,0,0,16"/>
+                        <GridView x:Name="RadioSuggestedGridView" SingleSelectionFollowsFocus="False" RelativePanel.Below="SuggestedStationsBlockHeader" SelectionMode="Single">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Vertical" MaximumRowsOrColumns="2" ItemHeight="324" ItemWidth="324"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridViewItem Background="DarkRed"/>
+                            <GridViewItem Background="DodgerBlue"/>
+                            <GridViewItem Background="ForestGreen"/>
+                            <GridViewItem Background="Goldenrod"/>
+                            <GridViewItem Background="#3C5AED"/>
+                            <GridViewItem Background="Purple"/>
+                        </GridView>
+                    </RelativePanel>
+                </RelativePanel>
+            </ctk:Case>
+            <ctk:Case Value="featured">
+                <RelativePanel Padding="172,26,0,0">
+                    <StackPanel x:Name="FeaturedPrimaryActionBlock" Spacing="8">
+                        <Button Content="New albums" Width="208" Height="208" Margin="0,40,0,0"/>
+                        <xbui:TileButton TileText="Search" Width="208" Height="208" Glyph="&#xE3F7;"/>
+                    </StackPanel>
+                    <RelativePanel x:Name="FeaturedMetaBlock" Margin="44,0,0,0" RelativePanel.RightOf="FeaturedPrimaryActionBlock">
+                        <TextBlock x:Name="FeaturedMetaBlockHeader" Text="FEATURED" FontSize="18" FontWeight="SemiBold" FontFamily="Segoe UI" CharacterSpacing="16" Margin="0,0,0,16"/>
+                        <GridView x:Name="FeaturedMetaGridView" RelativePanel.Below="FeaturedMetaBlockHeader">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Vertical" MaximumRowsOrColumns="2" ItemHeight="324" ItemWidth="648"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridViewItem Background="DarkRed"/>
+                            <GridViewItem Background="DodgerBlue"/>
+                        </GridView>
+                    </RelativePanel>
+                    <RelativePanel x:Name="NewAlbumGenreBlock" Margin="36,0,0,0" RelativePanel.RightOf="FeaturedMetaBlock">
+                        <TextBlock x:Name="NewAlbumGenreBlockHeader" Text="NEW [GENRE] ALBUMS" FontSize="18" FontWeight="SemiBold" FontFamily="Segoe UI" CharacterSpacing="16" Margin="0,0,0,16"/>
+                        <GridView x:Name="FeaturedNewAlbumGenreGridView" SingleSelectionFollowsFocus="False" RelativePanel.Below="NewAlbumGenreBlockHeader" SelectionMode="Single">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Vertical" MaximumRowsOrColumns="2" ItemHeight="324" ItemWidth="324"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridViewItem Background="DarkRed"/>
+                            <GridViewItem Background="DodgerBlue"/>
+                            <GridViewItem Background="ForestGreen"/>
+                            <GridViewItem Background="Goldenrod"/>
+                        </GridView>
+                        <Button x:Name="FeaturedNewViewAll" Content="icon" Background="#D3D3D3" RelativePanel.AlignRightWith="FeaturedNewAlbumGenreGridView" RelativePanel.AlignBottomWithPanel="True" Margin="0,0,8,-54" Width="100" Height="64"/>
+                    </RelativePanel>
+                </RelativePanel>
+            </ctk:Case>
+            <ctk:Case Value="top">
+                <RelativePanel Padding="172,26,0,0">
+                    <StackPanel x:Name="TopPrimaryActionBlock" Spacing="8">
+                        <Button Content="All top music" Width="208" Height="208" Margin="0,40,0,0"/>
+                        <xbui:TileButton TileText="Search" Width="208" Height="208" Glyph="&#xE3F7;"/>
+                    </StackPanel>
+                    <RelativePanel x:Name="TopAlbumsBlock" Margin="44,0,0,0" RelativePanel.RightOf="TopPrimaryActionBlock">
+                        <TextBlock x:Name="TopAlbumsBlockHeader" Text="TOP [GENRE] ALBUMS" FontSize="18" FontWeight="SemiBold" FontFamily="Segoe UI" CharacterSpacing="16" Margin="0,0,0,16"/>
+                        <GridView x:Name="TopAlbumGridView" RelativePanel.Below="TopAlbumsBlockHeader">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Vertical" MaximumRowsOrColumns="2" ItemHeight="324" ItemWidth="324"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridViewItem Background="DarkRed"/>
+                            <GridViewItem Background="DodgerBlue"/>
+                            <GridViewItem Background="ForestGreen"/>
+                            <GridViewItem Background="Goldenrod"/>
+                        </GridView>
+                        <Button x:Name="TopAlbumsViewAll" Content="icon" Background="#D3D3D3" RelativePanel.AlignRightWith="TopAlbumGridView" RelativePanel.AlignBottomWithPanel="True" Margin="0,0,8,-54" Width="100" Height="64"/>
+                    </RelativePanel>
+                    <RelativePanel x:Name="TopArtistsBlock" Margin="36,0,0,0" RelativePanel.RightOf="TopAlbumsBlock">
+                        <TextBlock x:Name="TopArtistsBlockHeader" Text="TOP [GENRE] ARTISTS" FontSize="18" FontWeight="SemiBold" FontFamily="Segoe UI" CharacterSpacing="16" Margin="0,0,0,16"/>
+                        <GridView x:Name="TopArtistsGridView" SingleSelectionFollowsFocus="False" RelativePanel.Below="TopArtistsBlockHeader" SelectionMode="Single">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsWrapGrid Orientation="Vertical" MaximumRowsOrColumns="2" ItemHeight="324" ItemWidth="324"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridViewItem Background="DarkRed"/>
+                            <GridViewItem Background="DodgerBlue"/>
+                            <GridViewItem Background="ForestGreen"/>
+                            <GridViewItem Background="Goldenrod"/>
+                        </GridView>
+                        <Button x:Name="TopArtistsViewAll" Content="icon" Background="#D3D3D3" RelativePanel.AlignRightWith="TopArtistsGridView" RelativePanel.AlignBottomWithPanel="True" Margin="0,0,8,-54" Width="100" Height="64"/>
+                    </RelativePanel>
+                </RelativePanel>
+            </ctk:Case>
+            <ctk:Case Value="unfaithful">
+                <StackPanel Spacing="32" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <ProgressRing IsActive="True"/>
+                    <TextBlock FontSize="44" TextLineBounds="Tight" FontFamily="Segoe UI" FontWeight="Light" Text="Hang tight! We're loading the settings page..." VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </ctk:Case>
+            <ctk:Case Value="unfaithful2">
+                <RelativePanel Margin="0,26,0,0" Padding="172,40,172,0">
+                    <Button x:Name="UnfaithfulButtonAgain" Content="Unfaithful mode settings" RelativePanel.RightOf="testpfp" Click="UnfaithfulButton_Click"/>
+                    <ListView x:Name="IconToggle" Header="Icon style" SingleSelectionFollowsFocus="False" MaxWidth="180" SelectionChanged="IconToggle_Toggled" RelativePanel.RightOf="testpfp" RelativePanel.Below="UnfaithfulButtonAgain">
+                        <x:String>Normal</x:String>
+                        <x:String>Modern</x:String>
+                        <x:String>Classic</x:String>
+                    </ListView>
+                    <Button Content="Add/remove Profile Picture" Click="ProfilePictureToggleClick" RelativePanel.Below="IconToggle" RelativePanel.RightOf="testpfp" Padding="12,10"/>
+                    <xbui:CustomPersonPicture x:Name="testpfp" Width="360" Height="360" ProfilePicture="/Assets/Images/GenericPFP.png" IconStyle="Modern"/>
+                    <Slider x:Name="GPSizeBox" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="IconToggle" Header="Size" Value="360" Minimum="72" Maximum="1080" ValueChanged="GPSizeBox_ValueChanged" StepFrequency="2" Width="480"/>
+                    <xbui:TileButton RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" TileText="" Width="208" Height="208" IconMargin="0,0,0,24"/>
+                </RelativePanel>
+            </ctk:Case>
+        </ctk:SwitchPresenter>
+        <Button x:Name="UnfaithfulButton" FontSize="36" Height="64" Margin="62,0" Width="64" Padding="0" HorizontalAlignment="Right" Click="UnfaithfulButton_Click" Visibility="Collapsed">
+            <TextBlock Margin="0,0,0,2" Text="&#xE40E;" FontFamily="{ThemeResource SymbolThemeFontFamily}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Button>
+    </Grid>
+</Page>

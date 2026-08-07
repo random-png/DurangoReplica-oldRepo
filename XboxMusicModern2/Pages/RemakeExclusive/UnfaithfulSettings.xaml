@@ -1,0 +1,144 @@
+﻿<Page
+    x:Class="XboxMusic.Pages.RemakeExclusive.UnfaithfulSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:XboxMusic.Pages.RemakeExclusive"
+    xmlns:l="using:XboxMusic.Pages.RemakeExclusive"
+    xmlns:xbui="using:XboxMusic.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d" Background="{ThemeResource UnfaithfulSettingsBackground}">
+    <Page.Resources>
+        <Style x:Key="UnfocusableGridViewItem" TargetType="GridViewItem">
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewItem">
+                        <ListViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}" x:Name="Root" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Selected"/>
+                                    <VisualState x:Name="PointerOverSelected"/>
+                                    <VisualState x:Name="PointerOverPressed"/>
+                                    <VisualState x:Name="Pressed"/>
+                                    <VisualState x:Name="PressedSelected"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="DisabledStates">
+                                    <VisualState x:Name="Enabled" />
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ListViewItemPresenter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition FromHorizontalOffset="500" FromVerticalOffset="0" IsStaggeringEnabled="True"/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <MediaElement x:Name="MediaElementPlayer" AutoPlay="True" Source="ms-appx:///Assets/Sounds/PanelUnfold.wav" Visibility="Collapsed" IsHitTestVisible="False"/>
+        <TextBlock x:Name="ScreenName" Text="Unfaithful mode options" VerticalAlignment="Top" FontSize="46" Margin="100,156,0,0" OpticalMarginAlignment="TrimSideBearings" FontWeight="Light" CharacterSpacing="40" FontFamily="Segoe UI"/>
+        <ScrollViewer Grid.Row="1" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+            <StackPanel Orientation="Horizontal" Padding="100,0,92,132" Spacing="80">
+                <StackPanel.ChildrenTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition FromHorizontalOffset="500" FromVerticalOffset="0" IsStaggeringEnabled="True"/>
+                    </TransitionCollection>
+                </StackPanel.ChildrenTransitions>
+                <Grid Margin="0,17,0,0" Width="462">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="72"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="WHAT IS THIS, ANYWAY?" Style="{ThemeResource GroupHeaderTextBlockStyle}"/>
+                    <ScrollViewer x:Name="ReturnInfoScrollViewer" Grid.Row="1" Margin="0,0,0,18" IsFocusEngagementEnabled="True" VerticalScrollBarVisibility="Hidden" BorderBrush="{ThemeResource ItemBorder}" BorderThickness="1" FocusDisengaged="ReturnInfoScrollViewer_FocusDisengaged">
+                        <TextBlock FontSize="24" OpticalMarginAlignment="TrimSideBearings" FontFamily="Segoe UI" TextWrapping="WrapWholeWords" Padding="8,6">
+                            <Run Foreground="{ThemeResource SystemAccentColor}" Text="TODO: Add instructions later, and make these functional. Some defaults will be set."/>
+                            <LineBreak/>To get back to this screen, press the following buttons at the same time:<LineBreak/><Run FontFamily="{ThemeResource SymbolThemeFontFamily}" Text="&#xE3E6; + &#xE3E4; + &#xE3EA; + &#xE3EC; + &#xE3CB;"/>
+                            <LineBreak/>Then click the <Run FontFamily="{ThemeResource SymbolThemeFontFamily}" Text="&#xE40E;"/> button in the top-right of the main screen.
+                            <LineBreak/><LineBreak/>You can also press the same buttons at the same time again to hide the <Run FontFamily="{ThemeResource SymbolThemeFontFamily}" Text="&#xE40E;"/> button.
+                            <LineBreak/><LineBreak/><Run Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}">Unfaithful mode's visibility is reset every session, but any settings you change are saved.</Run>
+                            <LineBreak/><LineBreak/><Run Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}">Disabling Unfaithful mode will prevent the app from loading these settings, but won't reset them. You can reset Unfaithful mode's settings by pressing the reset button below.</Run>
+                        </TextBlock>
+                    </ScrollViewer>
+                    <CheckBox x:Name="UnfaithfulSettingsToggle" MinHeight="72" MaxWidth="462" Grid.Row="2" Content="Enable Unfaithful mode" Margin="0,0,0,18" BorderThickness="1" HorizontalAlignment="Stretch" />
+                    <Button x:Name="UnfaithfulSettingResetButton" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" FontWeight="SemiBold" BorderThickness="1" BorderBrush="#28FFFFFF">
+                        <TextBlock CharacterSpacing="24">RESET ALL SETTINGS</TextBlock>
+                    </Button>
+                </Grid>
+                <RelativePanel x:Name="StylesSettingsBlock" RelativePanel.Below="ScreenName" Margin="0,17,0,0">
+                    <TextBlock x:Name="StylesSectionHeader" Text="APP STYLES" Style="{ThemeResource GroupHeaderTextBlockStyle}"/>
+                    <StackPanel x:Name="AppStyleSettingsList" RelativePanel.Below="StylesSectionHeader">
+                        <ComboBox x:Name="SystemThemeDropdown" Header="Theme">
+                            <ComboBoxItem Tag="Light" Content="Light"/>
+                            <ComboBoxItem Tag="Dark" Content="Dark"/>
+                            <ComboBoxItem Tag="Default" Content="Use system theme"/>
+                        </ComboBox>
+                        <ComboBox x:Name="AccentDropdown" Header="Accent color" IsEnabled="False" Description="Linked to branding" SelectionChanged="AccentDropdown_SelectionChanged">
+                            <ComboBoxItem Tag="XboxGreen">Xbox Green</ComboBoxItem>
+                            <ComboBoxItem Tag="GrooveBlue">Groove Blue</ComboBoxItem>
+                            <ComboBoxItem Tag="SystemColor">System accent color</ComboBoxItem>
+                            <ComboBoxItem Tag="CustomColor">Custom</ComboBoxItem>
+                        </ComboBox>
+                        <ComboBox x:Name="BrandingDropdown" Header="Branding" Description="Only applies internally" SelectionChanged="BrandingDropdown_SelectionChanged">
+                            <ComboBoxItem Tag="XboxMusic">Xbox Music</ComboBoxItem>
+                            <ComboBoxItem Tag="GrooveMusic">Groove Music</ComboBoxItem>
+                        </ComboBox>
+                        <CheckBox x:Name="AccentBrandingUnlinkCheckbox" Content="Unlink accent color and branding" Click="AccentBrandingUnlinkCheckbox_Toggled"/>
+                    </StackPanel>
+                </RelativePanel>
+                <RelativePanel x:Name="TempBlock" Margin="0,17,0,0">
+                    <TextBlock x:Name="SectionHeader2" Text="name later" Style="{ThemeResource GroupHeaderTextBlockStyle}"/>
+                    <ProgressRing IsActive="True" Width="424" RenderTransformOrigin="1,1"/>
+                </RelativePanel>
+                <RelativePanel x:Name="DevSettingsBlock" RelativePanel.Below="ScreenName" Margin="0,17,0,0">
+                    <TextBlock x:Name="DevSectionHeader" Text="DEVELOPMENT" Style="{ThemeResource GroupHeaderTextBlockStyle}"/>
+                    <StackPanel x:Name="DevSettingsList" RelativePanel.Below="DevSectionHeader">
+                        <CheckBox x:Name="ShowTestInMainCheckbox" Content="Show the &quot;test page&quot; tab in MainPage"/>
+                        <CheckBox x:Name="OnLaunchedFullScreenCheckBox" Content="Enter full screen when launched"/>
+                        <TextBox x:Name="PageNavigationTextBox" Header="Navigate to a page" Description="uh" AcceptsReturn="False"/>
+                    </StackPanel>
+                </RelativePanel>
+                <Grid x:Name="AboutBlock" Margin="0,17,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="AboutSectionHeader" Text="ABOUT THIS APP" Style="{ThemeResource GroupHeaderTextBlockStyle}"/>
+                    <Grid Grid.Row="1" RelativePanel.Below="AboutSectionHeader" RowSpacing="8" ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="208"/>
+                            <ColumnDefinition Width="208"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="208"/>
+                            <RowDefinition Height="208"/>
+                        </Grid.RowDefinitions>
+                        <xbui:TileButton VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TileText="Xbox Music app replica" Glyph="&#xE41A;" IconMargin="0,0,0,52" IconFontSize="58" Click="TileButton_Click">
+                            <xbui:TileButton.Resources>
+                                <SolidColorBrush x:Key="XBTileButtonBackground" Color="{ThemeResource SystemAccentColor}"/>
+                                <SolidColorBrush x:Key="XBTileButtonFocusedBackground" Color="{ThemeResource SystemAccentColor}"/>
+                            </xbui:TileButton.Resources>
+                        </xbui:TileButton>
+                        <xbui:TileButton Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TileText="{x:Bind CurrentAppVersion}" Glyph="&#xE474;" IconMargin="0,0,0,52" IconFontSize="58"/>
+                    </Grid>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        <xbui:NewDialog Visibility="Collapsed"/>
+    </Grid>
+</Page>
